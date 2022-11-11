@@ -5,11 +5,12 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt install -y git
+RUN apt-get update
+RUN apt-get install -y git
 
 RUN pip install --upgrade pip
-RUN pip install flask gunicorn psycopg2-binary
+RUN pip install flask gunicorn
 
-RUN git clone git@github.com:psarna/libsql_generate.git
+RUN git clone https://github.com/psarna/libsql_generate.git .
 
-ENTRYPOINT gunicorn --workers 1 --bind localhost:5001 wsgi:app
+ENTRYPOINT gunicorn --workers 1 --bind 0.0.0.0:8080 wsgi:app
