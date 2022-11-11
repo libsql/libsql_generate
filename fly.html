@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.3/dist/paper.min.css">
+  <title>Document</title>
+</head>
+<body>
+<br/>
+<center>
+  <form action="https://libsql-bindgen-backend.fly.dev/generate" method="POST">
+    <textarea rows="12" cols="80" id="src" name="src">
+
+pub fn encrypt(data: String, key: String) -> String {
+    use magic_crypt::MagicCryptTrait;
+    let mc = magic_crypt::new_magic_crypt!(key, 256);
+
+    mc.encrypt_str_to_base64(data)
+}
+</textarea>
+    </br>
+    <input type="submit" value="Submit">
+  </form>
+</center>
+</body>
+</html>
+
+
