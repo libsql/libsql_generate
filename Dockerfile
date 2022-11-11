@@ -1,12 +1,12 @@
-FROM python:slim-buster
+FROM rust:alpine3.15
 
 WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update
-RUN apt-get install -y git
+RUN apk add --no-cache git python3 py3-pip bash
+RUN rustup component add rustfmt
 
 RUN pip install --upgrade pip
 RUN pip install flask gunicorn
