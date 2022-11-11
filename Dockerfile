@@ -12,3 +12,4 @@ RUN pip install flask gunicorn psycopg2-binary
 
 RUN git clone git@github.com:psarna/libsql_generate.git
 
+ENTRYPOINT gunicorn --workers 1 --bind localhost:5001 wsgi:app
