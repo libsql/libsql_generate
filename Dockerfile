@@ -7,6 +7,7 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apk add --no-cache git python3 py3-pip bash
 RUN rustup component add rustfmt
+RUN cargo install rust-code-analysis-cli
 
 RUN pip install --upgrade pip
 RUN pip install flask gunicorn
