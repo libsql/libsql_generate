@@ -9,7 +9,7 @@ def generate():
     if len(src) > 4096:
         return "Max source code size is 4096 bytes"
     print(src)
-    with open("libsql-target/input.rs", "w", encoding = "utf-8") as f:
+    with open("libsql-target/input.rs", "w+", encoding = "utf-8") as f:
         f.write(src);
     result = subprocess.run(['./generate.sh'], capture_output=True)
     if result.returncode == 0:
