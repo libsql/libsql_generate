@@ -1,11 +1,12 @@
-FROM rust:alpine3.15
+FROM rust:slim-buster
 
 WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --no-cache git python3 py3-pip bash linux-headers 
+RUN apt-get update
+RUN apt-get install -y git python3 python3-pip bash
 RUN rustup component add rustfmt
 RUN cargo install rust-code-analysis-cli
 
