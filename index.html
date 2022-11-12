@@ -50,8 +50,7 @@ pub fn encrypt(data: String, key: String) -> String {
     <input type="submit" value="Generate">
   </form>
 <br/>
-<iframe id="resp" name="resp" width="80%" onLoad="document.getElementById('resp').outerHTML='<p></p>'"></iframe>
-<pre><code id="resp"></code></pre>
+<p id="resp"></p>
 </body>
 <script>
 $("#form").submit(function(e) {
@@ -63,7 +62,7 @@ $("#form").submit(function(e) {
       data: {src: $("#src").val()},
       success: function(data)
       {
-        alert(data); // show response from the php script.
+        $("#resp").text(data)
       }
   });
 });
