@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.3/dist/paper.min.css">
-  <title>Document</title>
+  <title>libSQL bindgen</title>
+  <style>
+    body {
+      text-align: center;
+      margin: auto;
+    }
+
+    textarea {
+      margin: auto;
+    }
+
+    input {
+      text-align: center;
+      margin: auto;
+    }
+  </style>
 </head>
+
 <body>
-<br/>
-<center>
-  <form action="https://libsql-bindgen-backend.fly.dev/generate" method="POST">
-    <textarea rows="12" cols="80" id="src" name="src">
+  </br>
+  <p>Brought to you by <a href="http://libsql.org">libSQL</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    Powered by <a href="http://github.com/psarna/libsql_bindgen">libSQL bindgen</a></p>
+  <pre>
+Type in a single Rust function definition below and get it transformed to a SQL statement,
+which you can copy-paste right into libSQL to register your brand new user-defined function.
+Use String or &amp;str for text, Vec&lt;u8&gt; for blobs, and i32/i64/f32/f64 for numerics.<p>Available crates:
+  - magic_crypt
+  - more coming soon!</p></pre>
+  </br>
+  <form action="https://libsql-bindgen-backend.fly.dev/generate" method="POST" target="resp">
+    <textarea rows="12" cols="80%" id="src" name="src">
 
 pub fn encrypt(data: String, key: String) -> String {
     use magic_crypt::MagicCryptTrait;
@@ -21,10 +46,10 @@ pub fn encrypt(data: String, key: String) -> String {
 }
 </textarea>
     </br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Generate">
   </form>
-</center>
+</br>
+<iframe name='resp' width="60%"></iframe>
 </body>
+
 </html>
-
-
