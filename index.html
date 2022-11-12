@@ -22,10 +22,11 @@
       margin: auto;
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
-  </br>
+  <br/>
   <p>Brought to you by <a href="http://libsql.org">libSQL</a>&nbsp;&nbsp;&nbsp;&nbsp;
     Powered by <a href="http://github.com/psarna/libsql_bindgen">libSQL bindgen</a></p>
   <pre>
@@ -34,8 +35,8 @@ which you can copy-paste right into libSQL to register your brand new user-defin
 Use String or &amp;str for text, Vec&lt;u8&gt; for blobs, and i32/i64/f32/f64 for numerics.<p>Available crates:
   - magic_crypt
   - more coming soon!</p></pre>
-  </br>
-  <form action="https://libsql-bindgen-backend.fly.dev/generate" method="POST" target="resp">
+  <br/>
+  <form name="form" id="form">
     <textarea rows="12" cols="80%" id="src" name="src">
 
 pub fn encrypt(data: String, key: String) -> String {
@@ -48,8 +49,24 @@ pub fn encrypt(data: String, key: String) -> String {
     </br>
     <input type="submit" value="Generate">
   </form>
-</br>
-<iframe name='resp' width="60%"></iframe>
+<br/>
+<iframe id="resp" name="resp" width="80%" onLoad="document.getElementById('resp').outerHTML='<p></p>'"></iframe>
+<pre><code id="resp"></code></pre>
 </body>
+<script>
+$("#form").submit(function(e) {
+  e.preventDefault();
 
+  $.ajax({
+      type: "POST",
+      url: "https://libsql-bindgen-backend.fly.dev/generate",
+      data: {src: $("#src").val()},
+      success: function(data)
+      {
+        alert(data); // show response from the php script.
+      }
+  });
+});
+</script>
+</script>
 </html>
