@@ -2,6 +2,8 @@
 
 set -e
 
+PRODUCE_BLOB=${1:-}
+
 rustfmt libsql-target/input.rs
 analyzed=$(rust-code-analysis-cli -lrust -F -p libsql-target/input.rs | sed $'s,\x1b\\[[0-9;]*[a-zA-Z],,g')
 loc=$(wc -l libsql-target/input.rs | cut -d' ' -f1)
@@ -20,4 +22,4 @@ echo >> src/lib.rs
 echo "#[libsql_bindgen::libsql_bindgen]" >> src/lib.rs
 cat libsql-target/input.rs >> src/lib.rs
 
-./get_sql.sh $fn_name
+./get_sql.sh $fn_name $PRODUCE_BLOB
