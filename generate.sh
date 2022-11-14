@@ -17,7 +17,7 @@ fi
 
 echo "use libsql_bindgen::*;" > src/lib.rs
 echo >> src/lib.rs
-echo "#[no_mangle]" >> src/lib.rs
+echo "#[libsql_bindgen::libsql_bindgen]" >> src/lib.rs
 cat libsql-target/input.rs >> src/lib.rs
 
 ./get_sql.sh $fn_name
