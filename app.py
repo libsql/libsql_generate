@@ -8,7 +8,7 @@ CORS(app)
 @app.route('/generate', methods = ['POST'])
 def generate():
     src = request.form['src']
-    blob = request.form['blob']
+    blob = request.form.get('blob', 'no')
     if len(src) > 4096:
         return "Max source code size is 4096 bytes"
     print(src)
