@@ -45,8 +45,10 @@ pub fn encrypt(data: String, key: String) -> String {
 
     mc.encrypt_str_to_base64(data)
 }
-</textarea>
+    </textarea>
     </br>
+    <input type="checkbox" id="blob" name="blob">
+    <label for="vehicle1">as a binary blob</label>
     <input type="submit" value="Generate">
   </form>
 <br/>
@@ -59,7 +61,7 @@ $("#form").submit(function(e) {
   $.ajax({
       type: "POST",
       url: "https://libsql-bindgen-backend.fly.dev/generate",
-      data: {src: $("#src").val()},
+      data: {src: $("#src").val(), blob: $("#blob").prop("checked") ? "yes" : "no"},
       success: function(data)
       {
         $("#resp").text(data)
