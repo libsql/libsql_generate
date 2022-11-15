@@ -35,6 +35,11 @@ which you can copy-paste right into libSQL to register your brand new user-defin
 Use String or &amp;str for text, Vec&lt;u8&gt; for blobs, and i32/i64/f32/f64 for numerics.<p>Available crates:
   - magic_crypt
   - more coming soon!</p></pre>
+<pre style="text-align:left; margin-left: 15%; margin-right: 15%">Steps to set up libSQL shell with WebAssembly user-defined functions support:
+1. Fetch the source from: https://github.com/libsql/libsql/pull/45
+2. Configure with wasm: ./configure --enable-wasm-runtime
+3. Compile: make
+4. Run with WebAssembly runtime library linked: LD_LIBRARY_PATH=.libs ./sqlite3</pre>
   <br/>
   <form name="form" id="form">
     <textarea rows="12" cols="80%" id="src" name="src">
