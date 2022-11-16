@@ -15,7 +15,7 @@ LIBSQL_TARGET_FILE=libsql-target/create_${LIBSQL_EXPORTED_FUNC}.sql
 
 CARGO_TARGET_DIR=libsql-target cargo build -j1 --quiet --release --target wasm32-unknown-unknown
 wasm-opt -Os $LIBSQL_COMPILED_WASM -o $LIBSQL_OPTIMIZED_WASM
-wasm-strip $LIBSQL_COMPILED_WASM
+wasm-strip $LIBSQL_OPTIMIZED_WASM
 echo ".init_wasm_func_table -- only needed for shell" > $LIBSQL_TARGET_FILE
 echo "DROP FUNCTION IF EXISTS $1;" >> $LIBSQL_TARGET_FILE
 if [[ "$LIBSQL_PRODUCE_BLOB" == "yes" ]]; then
