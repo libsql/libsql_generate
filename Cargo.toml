@@ -5,20 +5,18 @@ edition = "2021"
 
 [dependencies]
 libsql_bindgen = "0"
+byteorder = "1"
 bytes = "1"
 chrono = "0"
 itertools = "0"
-uuid = "1"
-snap = "1"
-lz4_flex = "0"
-byteorder = "1"
-magic-crypt = "3.1"
-rand = "0"
-regex = "1"
-getrandom = { version = "0", features = ["js"] }
-serde = "1"
-syn = "1"
 itoa = "1"
+lz4_flex = "0"
+magic-crypt = "3.1"
+regex = "1"
+serde = "1"
+snap = "1"
+syn = "1"
+uuid = "1"
 
 [lib]
 crate-type = ["cdylib"]
