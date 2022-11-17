@@ -6,6 +6,11 @@ edition = "2021"
 [dependencies]
 libsql_bindgen = "0"
 magic-crypt = "3.1"
+rand = "0"
+getrandom = { version = "0", features = ["js"] }
+serde = "1"
+syn = "1"
+itoa = "1"
 
 [lib]
 crate-type = ["cdylib"]
