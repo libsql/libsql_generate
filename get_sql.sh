@@ -13,7 +13,9 @@ LIBSQL_COMPILED_WASM=libsql-target/wasm32-unknown-unknown/release/libsql_generat
 LIBSQL_OPTIMIZED_WASM=libsql-target/libsql_generate.wasm
 LIBSQL_TARGET_FILE=libsql-target/create_${LIBSQL_EXPORTED_FUNC}.sql
 
-CARGO_TARGET_DIR=libsql-target cargo build -j1 --quiet --release --target wasm32-unknown-unknown
+CARGO_TARGET_DIR=libsql-target \
+    cargo +nightly build -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort \
+    -j1 --quiet --release --target wasm32-unknown-unknown
 wasm-opt -Os $LIBSQL_COMPILED_WASM -o $LIBSQL_OPTIMIZED_WASM
 wasm-strip $LIBSQL_OPTIMIZED_WASM
 echo ".init_wasm_func_table -- only needed for shell" > $LIBSQL_TARGET_FILE

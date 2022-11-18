@@ -25,5 +25,5 @@ crate-type = ["cdylib"]
 [profile.release]
 debug = false
 lto = true
-check-overflows = false
 opt-level = "s"
+panic = "abort"

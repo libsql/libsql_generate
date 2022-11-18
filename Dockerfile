@@ -8,6 +8,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apk add --no-cache git python3 py3-pip bash musl-dev binaryen build-base
 RUN apk add --no-cache wabt --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 RUN rustup component add rustfmt
+RUN rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
 RUN cargo install rust-code-analysis-cli
 
 RUN pip3 install --upgrade pip
