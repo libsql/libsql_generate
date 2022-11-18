@@ -17,6 +17,7 @@ serde = "1"
 snap = "1"
 syn = "1"
 uuid = "1"
+rand = { version = "0", features = ["std_rng", "small_rng"], default-features = false }
 
 [lib]
 crate-type = ["cdylib"]
