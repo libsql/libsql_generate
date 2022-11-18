@@ -7,9 +7,13 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update
 RUN apt-get install -y git python3 python3-pip bash binaryen build-essential wabt
-RUN rustup component add rustfmt
-RUN rustup target add nightly-x86_64-unknown-linux-gnu
+
+RUN rustup default nightly
+RUN rustup self update
+RUN rustup update
 RUN rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
+
+RUN rustup component add rustfmt
 RUN cargo install rust-code-analysis-cli
 
 RUN pip3 install --upgrade pip
