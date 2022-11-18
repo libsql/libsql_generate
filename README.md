@@ -7,3 +7,5 @@ It consists of a backend service which compiles Rust code to WebAssembly (see th
 and a simple static page serving as frontend.
 
 Official mirror is hosted at https://libsql-bindgen.sarna.dev
+
+Deploy your own instance by running fly.io's `flyctl deploy`, the `fly.toml` file is already here for your convenience.
