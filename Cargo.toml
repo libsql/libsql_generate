@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-libsql_bindgen = "0"
+libsql_bindgen = "0.2.4"
 byteorder = "1"
 bytes = "1"
 chrono = "0"
