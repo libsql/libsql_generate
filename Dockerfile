@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update
-RUN apt-get install -y git python3 python3-pip bash binaryen build-essential wabt
+RUN apt-get install -y git python3 python3-pip bash binaryen build-essential wabt xxd
 
 RUN rustup default nightly
 RUN rustup self update
