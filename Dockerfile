@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update
 RUN apt-get install -y git python3 python3-pip bash binaryen build-essential wabt
 RUN rustup component add rustfmt
 RUN rustup target add nightly-x86_64-unknown-linux-gnu
