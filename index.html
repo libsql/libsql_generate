@@ -55,10 +55,10 @@ Use String or &amp;str for text, Vec&lt;u8&gt; for blobs, and i32/i64/f32/f64 fo
   - more coming soon!</p></pre>
     <pre class="container">
 Steps to set up libSQL shell with WebAssembly user-defined functions support:
-1. Fetch the source from: https://github.com/libsql/libsql/pull/45
-2. Configure with wasm: ./configure --enable-wasm-runtime
-3. Compile: make
-4. Run: ./sqlite3</pre
+1a. Download the shell binary with WebAssembly support from <a href="https://github.com/libsql/libsql/releases/">here</a>
+or
+1b. Build from <a href="http://github.com/libsql/libsql">source</a>: ./configure --enable-wasm-runtime && make
+2. Run: ./libsql</pre
     >
     <br />
     <form name="form" class="container paper" id="form">
