@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/papercss@1.8.3/dist/paper.min.css"
+    />
+    <title>libSQL bindgen</title>
+    <style>
+      body {
+        text-align: center;
+        margin: auto;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.3/dist/paper.min.css">
-  <title>libSQL bindgen</title>
-  <style>
-    body {
-      text-align: center;
-      margin: auto;
-    }
+      textarea {
+        margin: auto;
+        width: 100%;
+        min-height: 300px;
+        padding: 1rem;
+      }
 
-    textarea {
-      margin: auto;
-    }
+      input {
+        text-align: center;
+        margin: auto;
+      }
 
-    input {
-      text-align: center;
-      margin: auto;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
+      pre {
+        max-width: 100%;
+        white-space: pre-wrap;
+      }
+    </style>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
 
-<body>
-  <br/>
-  <p>Brought to you by <a href="http://libsql.org">libSQL</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    Powered by <a href="http://github.com/psarna/libsql_bindgen">libSQL bindgen</a></p>
-  <pre>
+  <body>
+    <br />
+    <p>
+      Brought to you by
+      <a href="http://libsql.org">libSQL</a>&nbsp;&nbsp;&nbsp;&nbsp; Powered by
+      <a href="http://github.com/psarna/libsql_bindgen">libSQL bindgen</a>
+    </p>
+    <pre class="container margin-bottom">
 Type in a single Rust function definition below and get it transformed to a SQL statement,
 which you can copy-paste right into libSQL to register your brand new user-defined function.
 Use String or &amp;str for text, Vec&lt;u8&gt; for blobs, and i32/i64/f32/f64 for numerics.<p>Available crates:
   - bytes, byteorder, itertools, itoa, lz4_flex, magic-crypt, rand (without default features, just std_rng) regex, serde, snap, syn
   - more coming soon!</p></pre>
-<pre style="text-align:left; margin-left: 15%; margin-right: 15%">Steps to set up libSQL shell with WebAssembly user-defined functions support:
+    <pre class="container">
+Steps to set up libSQL shell with WebAssembly user-defined functions support:
 1. Fetch the source from: https://github.com/libsql/libsql/pull/45
 2. Configure with wasm: ./configure --enable-wasm-runtime
 3. Compile: make
-4. Run: ./sqlite3</pre>
-  <br/>
-  <form name="form" id="form">
-    <textarea rows="12" cols="80%" id="src" name="src">
+4. Run: ./sqlite3</pre
+    >
+    <br />
+    <form name="form" class="container paper" id="form">
+      <textarea id="src" name="src">
 
 pub fn encrypt(data: String, key: String) -> String {
     use magic_crypt::MagicCryptTrait;
@@ -50,29 +70,48 @@ pub fn encrypt(data: String, key: String) -> String {
 
     mc.encrypt_str_to_base64(data)
 }
-    </textarea>
-    </br>
-    <input type="checkbox" id="blob" name="blob" checked="true">
-    <label for="blob">as a binary blob</label>
-    <input type="submit" value="Generate">
-  </form>
-<br/>
-<pre id="resp" style="text-align:left"></pre>
-</body>
-<script>
-$("#form").submit(function(e) {
-  e.preventDefault();
+    </textarea
+      >
+      <br />
+      <input type="checkbox" id="blob" name="blob" />
+      <label for="blob">as a binary blob</label>
+      <div class="row flex-edges">
+        <button type="submit">Generate</button>
+        <button class="js-copy-button" disabled type="button">Copy SQL</button>
+      </div>
+    </form>
+    <br />
+    <div class="container">
+      <pre class="js-result" id="resp" style="text-align: left"></pre>
+    </div>
+  </body>
+  <script>
+    $('#form').submit(function (e) {
+      e.preventDefault()
+      $.ajax({
+        type: 'POST',
+        url: 'https://libsql-bindgen-backend.fly.dev/generate',
+        data: {
+          src: $('#src').val(),
+          blob: $('#blob').prop('checked') ? 'yes' : 'no',
+        },
+        success: function (data) {
+          const resultComponent = $('.js-result')
+          $('.js-result').text(data)
+          const copyButton = $('.js-copy-button')
+          copyButton.get(0).scrollIntoView({
+            behavior: 'smooth',
+          })
+          copyButton.removeAttr('disabled')
+        },
+      })
+    })
 
-  $.ajax({
-      type: "POST",
-      url: "https://libsql-bindgen-backend.fly.dev/generate",
-      data: {src: $("#src").val(), blob: $("#blob").prop("checked") ? "yes" : "no"},
-      success: function(data)
-      {
-        $("#resp").text(data)
+    $('.js-copy-button').click(function () {
+      const sqlCode = $('.js-result').text()
+      if (sqlCode) {
+        navigator.clipboard.writeText(sqlCode)
       }
-  });
-});
-</script>
-</script>
+    })
+  </script>
 </html>
