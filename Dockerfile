@@ -21,8 +21,8 @@ RUN pip3 install flask gunicorn flask-cors
 
 RUN rustup target add wasm32-unknown-unknown
 
-RUN echo checkout
-RUN git clone https://github.com/psarna/libsql_generate.git .
+#RUN git clone https://github.com/psarna/libsql_generate.git .
+COPY . .
 
 RUN ./generate.sh
 
