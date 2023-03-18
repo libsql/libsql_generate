@@ -1,4 +1,6 @@
 use libsql_bindgen::*;
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[libsql_bindgen::libsql_bindgen]
 pub fn encrypt(data: String, key: String) -> String {

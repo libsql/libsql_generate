@@ -18,6 +18,8 @@ if [[ "$fn_start" != "1" || "$fn_end" != "$loc" ]]; then
 fi
 
 echo "use libsql_bindgen::*;" > src/lib.rs
+echo "#[global_allocator]" >> src/lib.rs
+echo "static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;" >> src/lib.rs
 echo >> src/lib.rs
 echo "#[libsql_bindgen::libsql_bindgen]" >> src/lib.rs
 cat libsql-target/input.rs >> src/lib.rs
